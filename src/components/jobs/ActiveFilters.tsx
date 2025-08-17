@@ -6,6 +6,7 @@ import { useRouter, useSearchParams } from "next/navigation";
 import { clearFiltersServerAction } from "@/actions/clear-filters-server-action";
 
 // 3rd party
+import nProgress from "nprogress";
 import { IoCloseSharp } from "react-icons/io5";
 
 export default function ActiveFilters({
@@ -116,7 +117,7 @@ export default function ActiveFilters({
       {/* Clear All */}
       {activeFilters.length > 1 && (
         <form action={clearFiltersServerAction}>
-          <button type="submit">
+          <button type="submit" onClick={() => nProgress.start()}>
             <FilterTag
               label="Clear All"
               className="font-semibold text-red-600 bg-red-50 border-red-50 hover:bg-red-100 dark:text-red-300 dark:bg-red-950 dark:border-red-950 dark:hover:bg-red-900"

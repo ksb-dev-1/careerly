@@ -40,7 +40,7 @@ export default async function JobList({
   // 🟩 CASE 3: Jobs found
   return (
     <section className="w-full flex flex-col">
-      <ul className="w-full grid md:grid-cols-2 gap-4 sm:gap-8">
+      <ul className="w-full grid md:grid-cols-2 gap-8">
         {jobs.map((job: JobWithSavedStatusAndApplicationStatus) => (
           <li key={job.id}>
             <JobCard job={job} />
