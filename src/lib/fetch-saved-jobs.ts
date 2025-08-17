@@ -21,6 +21,7 @@ const _fetchSavedJobsFromDB = async ({ userId }: FetchSavedJobsParams) => {
         include: {
           applications: {
             where: { userId },
+            select: { status: true, updatedAt: true }, // 👈 added updatedAt
           },
         },
       },
@@ -32,6 +33,7 @@ const _fetchSavedJobsFromDB = async ({ userId }: FetchSavedJobsParams) => {
     ...savedJob.job,
     isSaved: true,
     applicationStatus: savedJob.job.applications[0]?.status || null,
+    appliedOn: savedJob.job.applications[0]?.updatedAt || null, // 👈 added
   }));
 
   return {

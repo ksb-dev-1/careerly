@@ -12,12 +12,11 @@ type FetchJobDetailsParams = {
 };
 
 // 👉 Raw DB query function (not cached directly)
+// 👉 Raw DB query function (not cached directly)
 const _fetchJobDetailsFromDB = async ({
   userId,
   jobId,
 }: FetchJobDetailsParams) => {
-  //console.log("⛏️ Fetching Job Details from DB");
-
   const job = await prisma.job.findUnique({
     where: { id: jobId },
     include: {
@@ -27,7 +26,7 @@ const _fetchJobDetailsFromDB = async ({
       },
       applications: {
         where: { userId },
-        select: { status: true },
+        select: { status: true, updatedAt: true }, // 👈 include updatedAt
       },
     },
   });
@@ -36,11 +35,13 @@ const _fetchJobDetailsFromDB = async ({
 
   const isSaved = job.savedByUsers.length > 0;
   const applicationStatus = job.applications[0]?.status || null;
+  const appliedOn = job.applications[0]?.updatedAt || null; // 👈 added
 
   return {
     ...job,
     isSaved,
     applicationStatus,
+    appliedOn, // 👈 now matches type
   };
 };
 

@@ -13,17 +13,17 @@ export default function ApplyNowTrigger({
   userId,
   jobId,
   applicationStatus,
-  updatedAt,
+  appliedOn,
 }: ApplyForJobProps) {
   const [isOpen, setIsOpen] = useState(false);
 
-  if (applicationStatus) {
+  if (applicationStatus && appliedOn) {
     return (
       <div className="w-full p-4 mt-6 flex flex-col gap-2 sm:gap-4 bg-emerald-50 dark:bg-emerald-950 text-emerald-700 dark:text-emerald-300 rounded border border-emerald-200 dark:border-emerald-700">
         {/* Date */}
         <div className="w-fit font-semibold flex items-center gap-3 bg-emerald-200/50 dark:bg-emerald-800/40 px-4 py-2 rounded">
           <CalenderCheckIcon className="w-5 h-5 text-emerald-700 dark:text-emerald-400" />
-          Applied on - {monthYearDate(updatedAt)}
+          Applied on - {monthYearDate(appliedOn)}
         </div>
 
         {/* Status message */}

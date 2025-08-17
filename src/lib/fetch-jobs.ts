@@ -134,12 +134,19 @@ const fetchUserJobMetadataFromDB = async (userId: string, jobIds: string[]) => {
       select: {
         jobId: true,
         status: true,
+        updatedAt: true,
       },
     }),
   ]);
 
   const savedSet = new Set(savedJobs.map((j) => j.jobId));
-  const applicationMap = new Map(applications.map((a) => [a.jobId, a.status]));
+  //const applicationMap = new Map(applications.map((a) => [a.jobId, a.status]));
+  const applicationMap = new Map(
+    applications.map((a) => [
+      a.jobId,
+      { status: a.status, appliedOn: a.updatedAt }, // 👈 renamed here
+    ])
+  );
 
   return { savedSet, applicationMap };
 };
@@ -159,11 +166,16 @@ export const fetchJobs = async (
       jobIds
     );
 
-    const personalizedJobs = publicData.jobs.map((job) => ({
-      ...job,
-      isSaved: savedSet.has(job.id),
-      applicationStatus: applicationMap.get(job.id) || null,
-    }));
+    const personalizedJobs = publicData.jobs.map((job) => {
+      const appData = applicationMap.get(job.id); // may be undefined
+
+      return {
+        ...job,
+        isSaved: savedSet.has(job.id),
+        applicationStatus: appData?.status || null,
+        appliedOn: appData?.appliedOn || null,
+      };
+    });
 
     return {
       jobs: personalizedJobs,

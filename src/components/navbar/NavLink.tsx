@@ -18,10 +18,11 @@ export default function NavLink({
     ? "w-full flex items-center px-4 py-2 rounded font-semibold text-lg"
     : "relative w-8 h-8 rounded-full";
 
-  const activeClasses = "text-primary pointer-events-none";
+  const activeClasses =
+    "text-primary bg-dark dark:bg-light pointer-events-none";
   const iconClass = isMobile
     ? "mr-3"
-    : "absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2";
+    : "absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 h-4 w-4";
 
   const inactiveClasses =
     "hover:text-primary hover:bg-dark dark:hover:bg-light";

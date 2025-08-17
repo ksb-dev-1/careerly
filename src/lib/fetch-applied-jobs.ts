@@ -16,7 +16,7 @@ const _fetchAppliedJobsFromDB = async ({ userId }: FetchAppliedJobsParams) => {
 
   const applications = await prisma.jobApplication.findMany({
     where: {
-      userId: userId,
+      userId,
     },
     include: {
       job: true,
@@ -28,12 +28,8 @@ const _fetchAppliedJobsFromDB = async ({ userId }: FetchAppliedJobsParams) => {
 
   // Get list of saved job IDs for the user
   const savedJobIds = await prisma.savedJob.findMany({
-    where: {
-      userId: userId,
-    },
-    select: {
-      jobId: true,
-    },
+    where: { userId },
+    select: { jobId: true },
   });
 
   const savedJobIdSet = new Set(savedJobIds.map((sj) => sj.jobId));
@@ -42,6 +38,7 @@ const _fetchAppliedJobsFromDB = async ({ userId }: FetchAppliedJobsParams) => {
     ...application.job,
     isSaved: savedJobIdSet.has(application.job.id),
     applicationStatus: application.status,
+    appliedOn: application.updatedAt || null, // 👈 added
   }));
 
   return {

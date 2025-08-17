@@ -45,7 +45,7 @@ interface ApplyForJobProps {
   userId: string;
   jobId: string;
   applicationStatus: ApplicationStatus | null;
-  updatedAt: Date;
+  appliedOn: Date | null;
 }
 
 interface JobDetailsProps {

@@ -3,6 +3,7 @@ import { Job, ApplicationStatus } from "@prisma/client";
 type JobWithSavedStatusAndApplicationStatus = Job & {
   isSaved: boolean;
   applicationStatus: ApplicationStatus | null;
+  appliedOn: Date | null;
 };
 
 type Jobs = {

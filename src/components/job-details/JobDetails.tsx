@@ -29,7 +29,7 @@ export default async function JobDetails({ params, userId }: JobDetailsProps) {
     return <ServerError />;
   }
 
-  const { id, description, applicationStatus, updatedAt } = data;
+  const { id, description, applicationStatus, appliedOn } = data;
 
   return (
     <article className="w-full flex flex-col">
@@ -46,7 +46,7 @@ export default async function JobDetails({ params, userId }: JobDetailsProps) {
         userId={userId}
         jobId={id}
         applicationStatus={applicationStatus}
-        updatedAt={updatedAt}
+        appliedOn={appliedOn}
       />
 
       {description && (
