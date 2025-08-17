@@ -7,16 +7,16 @@ import FloatingIcons from "@/components/home/FloatingIcons";
 export default function HomePage() {
   return (
     <div>
-      <div className="relative h-[calc(100vh-128px)] mt-16 overflow-hidden">
+      <section className="relative h-[calc(100vh-128px)] mt-16 overflow-hidden">
         <Heading />
         <FloatingIcons />
-      </div>
-      <div className="border-y py-16">
+      </section>
+      <section className="border-y py-16">
         <FeatureSection />
-      </div>
-      <div className="py-16">
+      </section>
+      <section className="py-16">
         <FAQ />
-      </div>
+      </section>
     </div>
   );
 }

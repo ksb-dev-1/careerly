@@ -19,13 +19,12 @@ export default function NavLink({
     : "relative w-8 h-8 rounded-full";
 
   const activeClasses =
-    "text-primary bg-dark dark:bg-light pointer-events-none";
+    "text-light dark:text-dark bg-primary pointer-events-none";
   const iconClass = isMobile
     ? "mr-3"
-    : "absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 h-4 w-4";
+    : "absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2";
 
-  const inactiveClasses =
-    "hover:text-primary hover:bg-dark dark:hover:bg-light";
+  const inactiveClasses = "hover:bg-dark dark:hover:bg-light";
 
   return (
     <LinkWithProgress

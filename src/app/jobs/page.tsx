@@ -93,7 +93,7 @@ export default async function JobsPage({ searchParams }: JobsPageProps) {
   return (
     <div className="min-h-screen">
       <div
-        className={`max-w-5xl px-4 w-full mx-auto pt-24 ${
+        className={`max-w-5xl px-6 w-full mx-auto pt-24 ${
           hasActiveFilters ? "" : "pb-16"
         }`}
       >
@@ -116,7 +116,7 @@ export default async function JobsPage({ searchParams }: JobsPageProps) {
 
       <hr className="mb-8" />
 
-      <div className="max-w-5xl w-full px-4 mx-auto mb-16">
+      <div className="max-w-5xl w-full px-6 mx-auto mb-16">
         <div className="flex items-center justify-between">
           <nav>
             <Breadcrumb items={breadcrumbItems} />

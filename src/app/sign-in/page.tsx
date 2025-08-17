@@ -23,7 +23,7 @@ export default async function SignInPage() {
   if (session?.user?.id) redirect("/jobs?page=1");
 
   return (
-    <main className="h-screen flex flex-col items-center justify-center px-4">
+    <main className="min-h-screen flex flex-col items-center justify-center px-6">
       <section className="max-w-xl w-full mx-auto border rounded p-4 sm:p-8">
         <h1 className="font-extrabold text-xl md:text-2xl mb-8 text-center">
           Sign in to <span className="text-primary">Jooble</span>

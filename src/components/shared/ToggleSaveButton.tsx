@@ -10,7 +10,7 @@ function IconButton({ children, label }: BookmarkIconButtonProps) {
       type="submit"
       aria-label={label}
       title={label}
-      className="flex items-center justify-center rounded-full h-8 w-8 hover:bg-dark dark:hover:bg-light"
+      className="flex items-center justify-center border rounded h-8 w-8 hover:bg-dark dark:hover:bg-light"
     >
       {children}
     </button>

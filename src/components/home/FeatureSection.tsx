@@ -8,7 +8,7 @@ import { motion } from "framer-motion";
 
 export default function FeatureSection() {
   return (
-    <section className="max-w-5xl px-4 mx-auto">
+    <div className="max-w-5xl w-full mx-auto px-6">
       <h2 className="text-xl md:text-2xl font-extrabold mb-8">
         <span className="inline-block border-b-2 border-primary text-primary origin-left">
           Features
@@ -40,6 +40,6 @@ export default function FeatureSection() {
           </motion.article>
         ))}
       </div>
-    </section>
+    </div>
   );
 }

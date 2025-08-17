@@ -61,7 +61,7 @@ export default function JobCard({
                 <span
                   className={`${
                     statusColors[applicationStatus as ApplicationStatus]
-                  } font-bold text-sm`}
+                  } font-bold`}
                 >
                   {applicationStatus.charAt(0) +
                     applicationStatus.substring(1).toLowerCase()}

@@ -66,7 +66,7 @@ export default function FAQ() {
   };
 
   return (
-    <div className="max-w-5xl mx-auto px-4">
+    <div className="max-w-5xl w-full mx-auto px-6">
       <h2 className="text-xl md:text-2xl font-extrabold mb-8">
         <span className="inline-block border-b-2 border-primary text-primary origin-left">
           FAQ
