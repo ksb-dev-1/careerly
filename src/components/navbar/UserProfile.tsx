@@ -58,7 +58,9 @@ export default function UserProfile({ image }: UserProfileProps) {
           href="/profile"
           onClick={toggleOpen}
           className={`${
-            isProfile ? "pointer-events-none" : ""
+            isProfile
+              ? "text-primary pointer-events-none"
+              : "pointer-events-auto"
           } px-4 py-2 flex items-center hover:bg-dark dark:hover:bg-light transition-colors rounded`}
         >
           <UserIcon />
