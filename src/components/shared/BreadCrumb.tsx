@@ -1,0 +1,34 @@
+"use client";
+
+// components
+import LinkWithProgress from "./LinkWithProgress";
+
+// 3rd party
+import { IoChevronForwardSharp } from "react-icons/io5";
+
+export default function Breadcrumb({ items, className }: BreadcrumbProps) {
+  return (
+    <nav className={`flex items-center gap-2 font-semibold ${className ?? ""}`}>
+      <ol className="flex items-center gap-2" role="list">
+        {items.map((item, index) => (
+          <li
+            key={item.href || item.label || index}
+            className="flex items-center gap-3"
+          >
+            {item.href ? (
+              <LinkWithProgress
+                href={item.href}
+                className="text-primary hover:underline"
+              >
+                {item.label}
+              </LinkWithProgress>
+            ) : (
+              <span aria-current="page">{item.label}</span>
+            )}
+            {index < items.length - 1 && <IoChevronForwardSharp />}
+          </li>
+        ))}
+      </ol>
+    </nav>
+  );
+}

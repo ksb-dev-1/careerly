@@ -1,0 +1,29 @@
+// 3rd party
+import clsx from "clsx";
+import { AiOutlineLoading3Quarters } from "react-icons/ai";
+
+export default function UploadResumeButton({
+  onClick,
+  disabled,
+  isPending,
+  className = "",
+}: UploadResumeButtonProps) {
+  return (
+    <button
+      type="button"
+      onClick={onClick}
+      disabled={disabled || isPending}
+      aria-label="Upload resume"
+      className={clsx(
+        "btn-primary relative",
+        disabled ? "btn-primary-disabled" : "btn-primary-hover",
+        className
+      )}
+    >
+      Upload
+      {isPending && (
+        <AiOutlineLoading3Quarters className="absolute right-4 animate-spin" />
+      )}
+    </button>
+  );
+}

@@ -1,0 +1,127 @@
+// components
+import LinkWithProgress from "./LinkWithProgress";
+import { ToggleSaveForm } from "./ToggleSaveForm";
+
+// utils
+import { formatMoney, relativeDate } from "@/utils";
+
+// components
+import {
+  BriefcaseIcon,
+  OfficeIcon,
+  LocationIcon,
+  RupeeIcon,
+  TimerIcon,
+} from "@/components/shared/icons";
+
+// 3rd party libraries
+import { FaClock } from "react-icons/fa";
+import { ApplicationStatus } from "@prisma/client";
+
+const statusColors: Record<ApplicationStatus, string> = {
+  PENDING: "text-amber-700 dark:text-amber-500",
+  OFFER: "border-emerald-600 bg-emerald-100 text-emerald-600",
+  INTERVIEW: "border-blue-600 bg-blue-100 text-blue-600",
+  REJECT: "border-red-600 bg-red-100 text-red-600",
+};
+
+export default function JobCard({
+  job,
+  link,
+  pointerEventsClass,
+}: JobCardProps) {
+  const {
+    id,
+    role,
+    companyName,
+    experience,
+    salary,
+    location,
+    jobType,
+    jobMode,
+    skills,
+    openings,
+    applicationStatus,
+    createdAt,
+  } = job;
+
+  return (
+    <article className="relative h-full">
+      <LinkWithProgress
+        href={link ?? `/jobs/${id}`}
+        className={`h-full block bg-light dark:bg-dark border rounded p-4 sm:p-6 hover:shadow-card transition-shadow ${pointerEventsClass}`}
+      >
+        <header>
+          <h2 className="font-extrabold text-lg mb-1">{role}</h2>
+          <p>
+            <span className="text-primary font-bold">{companyName}</span>
+            {applicationStatus && (
+              <>
+                <span className="inline-block mx-2">-</span>
+                <span
+                  className={`${
+                    statusColors[applicationStatus as ApplicationStatus]
+                  } font-bold text-sm`}
+                >
+                  {applicationStatus.charAt(0) +
+                    applicationStatus.substring(1).toLowerCase()}
+                </span>
+              </>
+            )}
+          </p>
+        </header>
+
+        <section className="mt-6" aria-label="Job details">
+          <div className="flex flex-wrap gap-x-8 gap-y-4 text-text_secondary">
+            <div className="flex items-center">
+              <BriefcaseIcon />
+              <span className="ml-2">{experience}</span>
+            </div>
+            <div className="flex items-center">
+              <LocationIcon />
+              <span className="ml-1">{location}</span>
+            </div>
+            <div className="flex items-center">
+              <TimerIcon />
+              <span className="ml-2">{jobType}</span>
+            </div>
+            <div className="flex items-center">
+              <OfficeIcon />
+              <span className="ml-2">{jobMode}</span>
+            </div>
+            <div className="flex items-center">
+              <RupeeIcon />
+              <span className="ml-1">{formatMoney(salary).slice(1)}</span>
+            </div>
+          </div>
+
+          <div className="flex items-end flex-wrap">
+            {skills?.length > 0 && (
+              <div className="flex flex-wrap items-center gap-2 mt-6">
+                {skills.map((skill: string) => (
+                  <div key={skill} className="flex items-center">
+                    <span className="capitalize text-text_secondary text-xs border rounded px-2 py-[2px]">
+                      {skill}
+                    </span>
+                  </div>
+                ))}
+              </div>
+            )}
+          </div>
+        </section>
+
+        <div className="w-full border-b mt-6 mb-2" role="presentation" />
+
+        <footer className="mt-4 flex items-center justify-between w-full text-text_secondary">
+          <p className="text-sm">Openings: {openings}</p>
+          <div className="w-fit flex items-center text-xs">
+            <FaClock aria-hidden="true" />
+            <span className="ml-1">{relativeDate(createdAt)}</span>
+          </div>
+        </footer>
+      </LinkWithProgress>
+
+      <ToggleSaveForm jobId={id} isSaved={job.isSaved} />
+    </article>
+  );
+}
